@@ -1,6 +1,6 @@
 {
   "name": "@mylims/base-processor",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Processor for B1505 instrument",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
