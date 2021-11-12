@@ -2,13 +2,22 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
 import Processor from './Processor';
-import type { ProcessorType } from './types';
+import ProcessorManager from './ProcessorManager';
 
 export { Processor };
-export type { ProcessorType };
-export type { ProcessorParams } from './types';
+export type { ProcessorParams, MeasurementType } from './types';
 
-export function processorCli(processorFunc: ProcessorType) {
+export interface ProcessorConfig {
+  topic: string;
+  processor(processor: Processor): void;
+  autoCreateSample?: boolean;
+}
+
+export function processorCli({
+  topic,
+  processor: processorFunc,
+  autoCreateSample = false,
+}: ProcessorConfig) {
   const { verbose, interval, username } = yargs(hideBin(process.argv))
     // Define the command line options
     .options({
@@ -38,6 +47,13 @@ export function processorCli(processorFunc: ProcessorType) {
       'count the lines in the given file',
     ).argv;
 
-  const processor = new Processor({ verbose, interval, username });
-  processor.run(processorFunc).catch((err) => processor.logger.error(err));
+  const processor = new ProcessorManager({
+    verbose,
+    interval,
+    username,
+    topic,
+    autoCreateSample,
+    processorFunction: processorFunc,
+  });
+  processor.run().catch((err) => processor.logger.error(err));
 }

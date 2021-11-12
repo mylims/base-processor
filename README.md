@@ -2,7 +2,7 @@
 
 [![build status][ci-image]][ci-url]
 
-Processor for B1505 instrument.
+Library for creating processors with MYLIMS
 
 ## Usage
 
@@ -14,10 +14,45 @@ npm install
 npm run tsc
 ```
 
-After is only needed to optionally specify the verbosity or interval in seconds for running again the processor (if not specified, it will run once):
+After is possible to define a processor that will consume the data from the file
+and will be able to upload a measurement to the database.
 
-```bash
-node ./lib/index.js --verbose --interval 60
+```ts
+import { Processor, ProcessorConfig } from '@mylims/base-processor';
+import { fromB1505, toJcamp } from 'iv-spectrum';
+
+const config: ProcessorConfig = {
+  topic: 'b1505',
+  process: processorFunc,
+  autoCreateSample: false,
+};
+
+async function processorFunc(processor: Processor) {
+  if (!processor.file) throw new Error('Missing file');
+
+  const { filename } = processor.file;
+  const username = filename.split('_')[0];
+  const sampleCode = filename.split('_').slice(1);
+  const content = await processor.file.read();
+  const analyses = fromB1505(content);
+
+  for (const analysis of analyses) {
+    const jcamp = toJcamp(analysis);
+    processor.addMeasurement({
+      file: {
+        content: jcamp,
+        filename: `${filename}.jdx`,
+        mimetype: 'chemical/x-jcamp-dx',
+      },
+      measurementType: 'iv',
+      derivedData: analysis.derived,
+      sampleCode,
+      username,
+    });
+  }
+}
+
+export default config;
 ```
 
 ## License
