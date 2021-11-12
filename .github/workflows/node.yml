@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 13.x]
+        node-version: [14.x, 16.x]
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -29,6 +29,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install and test
         run: |
+          # Node.js 14 has npm 6, so we need to update to the latest.
+          npm install -g npm
           npm install
           npm run test
         env:

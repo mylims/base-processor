@@ -1,3 +1,5 @@
+import Processor from './Processor';
+
 // Event related types
 export enum EventStatus {
   PENDING = 'pending',
@@ -36,21 +38,57 @@ export interface Event {
 
 // Processor related types
 export interface ProcessorParams {
-  interval?: number;
+  topic: string;
   verbose: boolean;
+  autoCreateSample: boolean;
+  interval?: number;
   username?: string;
+  processorFunction(processor: Processor): Promise<void>;
+}
+export interface ProcessorEnvs {
+  token: string;
+  eventUrl: string;
+  processorId: string;
+  fileEndpoint: string;
+  uploadEndpoint: string;
 }
 
-export type ProcessorType = (
-  /** Raw file content */
-  content: Buffer,
-  filename: string,
-  username?: string,
-) => Array<{
-  file?: string;
-  derived?: Record<string, string>;
-  description?: string;
-  sampleCode: string[];
+export interface MeasurementFileType {
+  content: string;
   filename: string;
+  mimetype?: string;
+}
+export interface MeasurementPathType {
+  absolutePath: string;
+  mimetype?: string;
+}
+export function isMeasurementFileType(
+  file: MeasurementFileType | MeasurementPathType,
+): file is MeasurementFileType {
+  return (file as MeasurementFileType).filename !== undefined;
+}
+interface Measurement {
+  file?: MeasurementFileType | MeasurementPathType;
+  measurementType: string;
+  derivedData: Record<string, string>;
+}
+export interface MeasurementUUID10 extends Measurement {
+  uuid10: string;
+}
+export interface MeasurementSampleCode extends Measurement {
+  sampleCode: string[];
   username: string;
-}>;
+}
+export function isUUID10(
+  measurement: MeasurementType,
+): measurement is MeasurementUUID10 {
+  return (measurement as MeasurementUUID10).uuid10 !== undefined;
+}
+export type MeasurementType = MeasurementUUID10 | MeasurementSampleCode;
+
+export interface FileType {
+  filename: string;
+  dirname?: string;
+  extension?: string;
+  read(): Promise<Buffer>;
+}
