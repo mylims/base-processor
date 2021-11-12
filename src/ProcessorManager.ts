@@ -22,7 +22,7 @@ export default class ProcessorManager {
   private envs: ProcessorEnvs;
   private interval?: number;
   private autoCreateSample: boolean;
-  private processorFunction: (processor: Processor) => Promise<void>;
+  private processorFunction: ProcessorParams['processorFunction'];
 
   public constructor({
     interval,

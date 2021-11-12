@@ -3,13 +3,14 @@ import { hideBin } from 'yargs/helpers';
 
 import Processor from './Processor';
 import ProcessorManager from './ProcessorManager';
+import { ProcessorParams } from './types';
 
 export { Processor };
 export type { ProcessorParams, MeasurementType } from './types';
 
 export interface ProcessorConfig {
   topic: string;
-  processor(processor: Processor): void;
+  processor: ProcessorParams['processorFunction'];
   autoCreateSample?: boolean;
 }
 
