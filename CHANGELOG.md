@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.2.0](https://www.github.com/mylims/base-processor/compare/v0.1.1...v0.2.0) (2021-11-12)
+
+
+### ⚠ BREAKING CHANGES
+
+* topic and collection name are at the processor level, not at env variables, and a processor receives a class instance instead of some metadata
+
+### Code Refactoring
+
+* processor can specify topic, if sample is upsert and allows to not save ([#6](https://www.github.com/mylims/base-processor/issues/6)) ([2284aa1](https://www.github.com/mylims/base-processor/commit/2284aa1427dc55ca3745085d0c63ff602cf96b3e)), closes [#3](https://www.github.com/mylims/base-processor/issues/3) [#5](https://www.github.com/mylims/base-processor/issues/5)
+
 ### [0.1.1](https://www.github.com/mylims/base-processor/compare/v0.1.0...v0.1.1) (2021-10-14)
 
 
