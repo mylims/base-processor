@@ -29,6 +29,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: npm install and test
         run: |
+          # Node.js 14 has npm 6, so we need to update to the latest.
+          npm install -g npm
           npm install
           npm run test
         env:
