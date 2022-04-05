@@ -40,7 +40,6 @@ export interface Event {
 export interface ProcessorParams {
   topic: string;
   verbose: boolean;
-  autoCreateSample: boolean;
   processorFunction(processor: Processor): Promise<void>;
   interval?: number;
   username?: string;
@@ -54,7 +53,7 @@ export interface ProcessorEnvs {
 }
 
 export interface MeasurementFileType {
-  content: string;
+  content: string | Buffer;
   filename: string;
   mimetype?: string;
 }
@@ -70,6 +69,7 @@ export function isMeasurementFileType(
 interface Measurement {
   measurementType: string;
   derivedData: Record<string, string>;
+  title?: string;
   file?: MeasurementFileType | MeasurementPathType;
 }
 export interface MeasurementUUID10 extends Measurement {

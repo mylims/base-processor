@@ -54,7 +54,6 @@ test('Basic flow', () => {
     verbose: true,
     username: 'test',
     topic: 'test',
-    autoCreateSample: true,
     processorFunction: processorFunc,
   });
 

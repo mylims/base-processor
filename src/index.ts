@@ -11,12 +11,10 @@ export type { ProcessorParams, MeasurementType } from './types';
 export interface ProcessorConfig {
   topic: string;
   processor: ProcessorParams['processorFunction'];
-  autoCreateSample?: boolean;
 }
 
 export function processorCli({
   topic,
-  autoCreateSample = false,
   processor: processorFunc,
 }: ProcessorConfig) {
   const { verbose, interval, username } = yargs(hideBin(process.argv))
@@ -53,7 +51,6 @@ export function processorCli({
     interval,
     username,
     topic,
-    autoCreateSample,
     processorFunction: processorFunc,
   });
   processor.run().catch((err) => processor.logger.error(err));
