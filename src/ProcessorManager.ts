@@ -2,6 +2,7 @@ import { promisify } from 'util';
 
 import dotenv from 'dotenv';
 import pino from 'pino';
+import pretty from 'pino-pretty';
 
 import Processor from './Processor';
 import {
@@ -15,7 +16,7 @@ import { ProcessorParams, EventStatus, ProcessorEnvs } from './types';
 const asyncTimeout = promisify(setTimeout);
 
 export default class ProcessorManager {
-  public logger = pino({ prettyPrint: { colorize: true } });
+  public logger = pino(pretty({ colorize: true }));
   public username?: string;
   public topic: string;
 

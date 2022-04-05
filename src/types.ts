@@ -2,10 +2,10 @@ import Processor from './Processor';
 
 // Event related types
 export enum EventStatus {
+  ERROR = 'error',
+  SUCCESS = 'success',
   PENDING = 'pending',
   PROCESSING = 'processing',
-  SUCCESS = 'success',
-  ERROR = 'error',
 }
 export enum EventDataType {
   FILE = 'file',
@@ -17,15 +17,15 @@ export interface EventProcessor {
 }
 
 export interface EventHistory {
+  date: Date;
   processId: string;
   status: EventStatus;
-  date: Date;
   message?: string;
 }
 
 export interface EventData {
-  type: EventDataType;
   fileId: string;
+  type: EventDataType;
 }
 
 export interface Event {
@@ -41,9 +41,9 @@ export interface ProcessorParams {
   topic: string;
   verbose: boolean;
   autoCreateSample: boolean;
+  processorFunction(processor: Processor): Promise<void>;
   interval?: number;
   username?: string;
-  processorFunction(processor: Processor): Promise<void>;
 }
 export interface ProcessorEnvs {
   token: string;
@@ -68,16 +68,16 @@ export function isMeasurementFileType(
   return (file as MeasurementFileType).filename !== undefined;
 }
 interface Measurement {
-  file?: MeasurementFileType | MeasurementPathType;
   measurementType: string;
   derivedData: Record<string, string>;
+  file?: MeasurementFileType | MeasurementPathType;
 }
 export interface MeasurementUUID10 extends Measurement {
   uuid10: string;
 }
 export interface MeasurementSampleCode extends Measurement {
-  sampleCode: string[];
   username: string;
+  sampleCode: string[];
 }
 export function isUUID10(
   measurement: MeasurementType,
