@@ -36,12 +36,11 @@ export async function getFile(envs: ProcessorEnvs, fileId: string) {
 
 interface UploadMeasurementParams {
   measurement: MeasurementType;
-  autoCreateSample: boolean;
   eventId: string;
 }
 export async function uploadMeasurement(
   envs: ProcessorEnvs,
-  { measurement, autoCreateSample, eventId }: UploadMeasurementParams,
+  { measurement, eventId }: UploadMeasurementParams,
 ) {
   const formData = new FormData();
   if (measurement.file) {
@@ -55,6 +54,9 @@ export async function uploadMeasurement(
       throw new Error('Method not defined');
     }
   }
+  if (measurement.title) {
+    formData.append('title', measurement.title);
+  }
   if (measurement.derivedData) {
     formData.append('derived', JSON.stringify(measurement.derivedData));
   }
@@ -63,9 +65,6 @@ export async function uploadMeasurement(
   } else {
     formData.append('sampleCode', measurement.sampleCode.join(','));
     formData.append('username', measurement.username);
-  }
-  if (autoCreateSample) {
-    formData.append('autoCreateSample', 'true');
   }
   formData.append('collection', measurement.measurementType);
   formData.append('eventId', eventId);

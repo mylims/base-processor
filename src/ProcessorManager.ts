@@ -22,7 +22,6 @@ export default class ProcessorManager {
 
   private envs: ProcessorEnvs;
   private interval?: number;
-  private autoCreateSample: boolean;
   private processorFunction: ProcessorParams['processorFunction'];
 
   public constructor({
@@ -30,13 +29,11 @@ export default class ProcessorManager {
     verbose,
     username,
     topic,
-    autoCreateSample,
     processorFunction,
   }: ProcessorParams) {
     this.interval = interval;
     this.username = username;
     this.topic = topic;
-    this.autoCreateSample = autoCreateSample;
     this.processorFunction = processorFunction;
     this.logger.level = verbose ? 'debug' : 'info';
 
@@ -126,7 +123,6 @@ export default class ProcessorManager {
         await uploadMeasurement(this.envs, {
           measurement,
           eventId,
-          autoCreateSample: this.autoCreateSample,
         });
         this.logger.info('Result uploaded', eventId, filename);
       }
