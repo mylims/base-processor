@@ -3,11 +3,11 @@ import got from 'got';
 
 import {
   Event,
-  EventStatus,
-  isMeasurementFileType,
   isUUID10,
-  MeasurementType,
+  EventStatus,
   ProcessorEnvs,
+  MeasurementType,
+  isMeasurementFileType,
 } from './types';
 
 export function getNextUrl(envs: ProcessorEnvs, topic: string): Promise<Event> {

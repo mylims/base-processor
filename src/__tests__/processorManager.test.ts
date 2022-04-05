@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { mocked } from 'ts-jest/utils';
+import { mocked } from 'jest-mock';
 
 import Processor from '../Processor';
 import ProcessorManager from '../ProcessorManager';

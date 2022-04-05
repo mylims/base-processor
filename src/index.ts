@@ -16,8 +16,8 @@ export interface ProcessorConfig {
 
 export function processorCli({
   topic,
-  processor: processorFunc,
   autoCreateSample = false,
+  processor: processorFunc,
 }: ProcessorConfig) {
   const { verbose, interval, username } = yargs(hideBin(process.argv))
     // Define the command line options

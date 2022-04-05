@@ -38,23 +38,24 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "@types/pino": "^6.3.11",
+    "@types/pino": "^7.0.4",
     "@types/yargs": "^16.0.4",
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "form-data": "^4.0.0",
     "got": "^11.8.2",
-    "pino": "^6.13.3",
-    "pino-pretty": "^7.0.1",
+    "pino": "^7.9.2",
+    "pino-pretty": "^7.6.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "eslint": "^7.32.0",
-    "eslint-config-cheminfo-typescript": "^8.0.9",
-    "jest": "^27.3.1",
-    "prettier": "^2.4.1",
+    "@types/jest": "^27.4.1",
+    "eslint": "^8.12.0",
+    "eslint-config-cheminfo-typescript": "^10.4.0",
+    "jest": "^27.5.1",
+    "jest-mock": "^27.5.1",
+    "prettier": "^2.6.2",
     "rimraf": "^3.0.2",
-    "ts-jest": "^27.0.7",
-    "typescript": "^4.4.3"
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.3"
   }
 }
