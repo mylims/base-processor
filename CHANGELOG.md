@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.3.0](https://www.github.com/mylims/base-processor/compare/v0.2.0...v0.3.0) (2022-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* update processor fields
+
+### Miscellaneous Chores
+
+* update processor fields ([c5f3c3a](https://www.github.com/mylims/base-processor/commit/c5f3c3a85d73fa77f61b12fb17f8e3e75b0d0e0d))
+
 ## [0.2.0](https://www.github.com/mylims/base-processor/compare/v0.1.1...v0.2.0) (2021-11-12)
 
 
