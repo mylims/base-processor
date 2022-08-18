@@ -41,10 +41,8 @@ export function processorCli({
     })
     .usage('Usage: $0 <command> [options]')
     .command('process', 'start the processor')
-    .example(
-      '$0 process --interval 10',
-      'count the lines in the given file',
-    ).argv;
+    .example('$0 process --interval 10', 'count the lines in the given file')
+    .parseSync();
 
   const processor = new ProcessorManager({
     verbose,
