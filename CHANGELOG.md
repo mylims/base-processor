@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.4.0](https://www.github.com/mylims/base-processor/compare/v0.3.0...v0.4.0) (2022-08-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* update dependencies (#11)
+
+### Miscellaneous Chores
+
+* update dependencies ([#11](https://www.github.com/mylims/base-processor/issues/11)) ([0a98777](https://www.github.com/mylims/base-processor/commit/0a987770b129e4fc553d82bcbefbc5320d4dbb5b))
+
 ## [0.3.0](https://www.github.com/mylims/base-processor/compare/v0.2.0...v0.3.0) (2022-04-06)
 
 
